@@ -1,6 +1,7 @@
 package es.upm.miw.SolitarioCelta;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends Activity {
 
@@ -98,7 +104,12 @@ public class MainActivity extends Activity {
             case R.id.opcReiniciarPartida:
                 new AlertDialogRestartFragment().show(getFragmentManager(), "ALERT DIALOG");
                 return true;
-
+            case R.id.opcGuardarPartida:
+                saveGame();
+                return true;
+            case R.id.opcRecuperarPartida:
+                loadGame();
+                return true;
             // TODO!!! resto opciones
 
             default:
@@ -109,5 +120,38 @@ public class MainActivity extends Activity {
                 ).show();
         }
         return true;
+    }
+
+    public void saveGame(){
+        String currentState = juego.serializaTablero();
+        try {
+            FileOutputStream fos = openFileOutput(getString(R.string.savedGame), Context.MODE_PRIVATE);
+            fos.write(currentState.getBytes());
+            fos.close();
+            Toast.makeText(this,
+                    getString(R.string.saveGameSuccess),
+                    Toast.LENGTH_SHORT).show();
+        }catch (IOException e) {
+            Toast.makeText(this,
+                    getString(R.string.saveGameException),
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void loadGame(){
+        try {
+            BufferedReader fin = new BufferedReader(
+                    new InputStreamReader(openFileInput(getString(R.string.savedGame))));
+            String game = fin.readLine();
+            juego.deserializaTablero(game);
+            mostrarTablero();
+            Toast.makeText(this,
+                    getString(R.string.loadGameSuccess),
+                    Toast.LENGTH_SHORT).show();
+        }catch (IOException e) {
+            Toast.makeText(this,
+                    getString(R.string.loadGameException),
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

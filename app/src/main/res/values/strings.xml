@@ -30,5 +30,14 @@
     <string name="prefTituloCategoria2">Ajustes del juego</string>
     <string name="preferencesText">Ajustes</string>
 
+    <!-- File names -->
+    <string name="savedGame">savedGame</string>
+
+    <!-- Save and Load Game -->
+    <string name="saveGameException">Error al guardar el juego</string>
+    <string name="saveGameSuccess">Partida guardada exitosamente</string>
+    <string name="loadGameException">Error al cargar el juego</string>
+    <string name="loadGameSuccess">Partida cargada exitosamente</string>
+
 
 </resources>
