@@ -95,6 +95,9 @@ public class MainActivity extends Activity {
             case R.id.opcAcercaDe:
                 startActivity(new Intent(this, AcercaDe.class));
                 return true;
+            case R.id.opcReiniciarPartida:
+                new AlertDialogRestartFragment().show(getFragmentManager(), "ALERT DIALOG");
+                return true;
 
             // TODO!!! resto opciones
 
