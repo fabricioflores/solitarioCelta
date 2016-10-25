@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -65,6 +66,8 @@ public class MainActivity extends Activity {
                     button.setChecked(juego.obtenerFicha(i, j) == JuegoCelta.FICHA);
                 }
             }
+        TextView barraEstado = (TextView) findViewById(R.id.barraEstado);
+        barraEstado.setText("Fichas restantes: " + juego.numeroFichas());
     }
 
     /**
