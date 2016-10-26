@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,13 +21,17 @@ import java.io.InputStreamReader;
 public class MainActivity extends Activity {
 
 	JuegoCelta juego;
+    boolean isPristine = true;
+    boolean needStop = false;
     private final String GRID_KEY = "GRID_KEY";
+    Chronometer chronometer;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         juego = new JuegoCelta();
         mostrarTablero();
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
     }
 
     /**
@@ -35,6 +41,11 @@ public class MainActivity extends Activity {
      * @param v Vista de la ficha pulsada
      */
     public void fichaPulsada(View v) {
+        if(isPristine){
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.start();
+            isPristine = false;
+        }
         String resourceName = getResources().getResourceEntryName(v.getId());
         int i = resourceName.charAt(1) - '0';   // fila
         int j = resourceName.charAt(2) - '0';   // columna
