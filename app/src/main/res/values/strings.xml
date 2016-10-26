@@ -39,10 +39,12 @@
     <!-- Save and Load Game -->
     <string name="saveGameException">Error al guardar el juego</string>
     <string name="saveGameSuccess">Partida guardada exitosamente</string>
-    <string name="loadGameException">Error al cargar el juego</string>
+    <string name="loadGameException">No existen juegos guardados</string>
     <string name="loadGameSuccess">Partida cargada exitosamente</string>
 
     <!-- Scores -->
     <string name="saveScoreException">Error al guardar la puntuación</string>
+    <string name="loadScoreException">No existen puntiaciones aún</string>
+    <string name="showResults">Mostrar Resultados</string>
 
 </resources>

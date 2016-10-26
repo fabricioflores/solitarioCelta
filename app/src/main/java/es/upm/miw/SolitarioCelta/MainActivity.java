@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
                         getString(R.string.saveScoreException),
                         Toast.LENGTH_SHORT).show();
             }
-            
+
             new AlertDialogFragment().show(getFragmentManager(), "ALERT DIALOG");
         }
     }
@@ -143,6 +143,9 @@ public class MainActivity extends Activity {
                 return true;
             case R.id.opcRecuperarPartida:
                 loadGame();
+                return true;
+            case R.id.opcMejoresResultados:
+                startActivity(new Intent(this, ShowResults.class));
                 return true;
             // TODO!!! resto opciones
 
