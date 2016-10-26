@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String username = preferences.getString(getString(R.string.settingsUsername), getString(R.string.settingsUsernameDefault));
             int score = juego.numeroFichas();
-            long time = chronometer.getBase();
+            String time = chronometer.getText().toString();
             Result result = new Result(username, score, time);
             try {
                 String toFile = result.toString() + "\n";

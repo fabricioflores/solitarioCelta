@@ -44,7 +44,7 @@
 
     <!-- Scores -->
     <string name="saveScoreException">Error al guardar la puntuación</string>
-    <string name="loadScoreException">No existen puntiaciones aún</string>
+    <string name="loadScoreException">No existen puntuaciones aún</string>
     <string name="showResults">Mostrar Resultados</string>
 
 </resources>
