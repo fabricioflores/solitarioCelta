@@ -3,8 +3,10 @@ package es.upm.miw.SolitarioCelta;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,8 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import es.upm.miw.SolitarioCelta.models.Result;
 
 public class MainActivity extends Activity {
 
@@ -54,7 +58,23 @@ public class MainActivity extends Activity {
 
         mostrarTablero();
         if (juego.juegoTerminado()) {
-            // TODO guardar puntuación
+            chronometer.stop();
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            String username = preferences.getString(getString(R.string.settingsUsername), getString(R.string.settingsUsernameDefault));
+            int score = juego.numeroFichas();
+            long time = chronometer.getBase();
+            Result result = new Result(username, score, time);
+            try {
+                String toFile = result.toString() + "\n";
+                FileOutputStream fos = openFileOutput(getString(R.string.scores), Context.MODE_APPEND);
+                fos.write(toFile.getBytes());
+                fos.close();
+            }catch (IOException e) {
+                Toast.makeText(this,
+                        getString(R.string.saveScoreException),
+                        Toast.LENGTH_SHORT).show();
+            }
+            
             new AlertDialogFragment().show(getFragmentManager(), "ALERT DIALOG");
         }
     }
