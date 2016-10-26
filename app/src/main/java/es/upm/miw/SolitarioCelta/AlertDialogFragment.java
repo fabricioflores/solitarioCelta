@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 
 public class AlertDialogFragment extends DialogFragment {
 	@Override
@@ -20,6 +21,9 @@ public class AlertDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                main.isPristine = true;
+                                main.chronometer.setBase(SystemClock.elapsedRealtime());
+                                main.chronometer.stop();
                                 main.juego.reiniciar();
                                 main.mostrarTablero();
                             }
