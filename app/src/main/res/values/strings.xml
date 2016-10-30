@@ -41,6 +41,8 @@
     <string name="saveGameSuccess">Partida guardada exitosamente</string>
     <string name="loadGameException">No existen juegos guardados</string>
     <string name="loadGameSuccess">Partida cargada exitosamente</string>
+    <string name="loadGameTitle">Cargar juego</string>
+    <string name="loadGameQuestion">Ya has jugado. ¿Estás seguro de cargar el nuevo juego?</string>
 
     <!-- Scores -->
     <string name="saveScoreException">Error al guardar la puntuación</string>

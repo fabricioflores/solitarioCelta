@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
 
 	JuegoCelta juego;
     boolean isPristine = true;
-    boolean needStop = false;
     private final String GRID_KEY = "GRID_KEY";
     Chronometer chronometer;
 
@@ -142,13 +141,15 @@ public class MainActivity extends Activity {
                 saveGame();
                 return true;
             case R.id.opcRecuperarPartida:
-                loadGame();
+                if(isPristine){
+                    loadGame();
+                }else{
+                    new AlertDialogLoadFragment().show(getFragmentManager(), "ALERT DIALOG");
+                }
                 return true;
             case R.id.opcMejoresResultados:
                 startActivity(new Intent(this, ShowResults.class));
                 return true;
-            // TODO!!! resto opciones
-
             default:
                 Toast.makeText(
                         this,
@@ -182,6 +183,9 @@ public class MainActivity extends Activity {
             String game = fin.readLine();
             juego.deserializaTablero(game);
             mostrarTablero();
+            isPristine = true;
+            chronometer.stop();
+            chronometer.setBase(SystemClock.elapsedRealtime());
             Toast.makeText(this,
                     getString(R.string.loadGameSuccess),
                     Toast.LENGTH_SHORT).show();
