@@ -19,6 +19,10 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import es.upm.miw.SolitarioCelta.models.Result;
 
@@ -62,7 +66,10 @@ public class MainActivity extends Activity {
             String username = preferences.getString(getString(R.string.settingsUsername), getString(R.string.settingsUsernameDefault));
             int score = juego.numeroFichas();
             String time = chronometer.getText().toString();
-            Result result = new Result(username, score, time);
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date today = Calendar.getInstance().getTime();
+            String reportDate = df.format(today);
+            Result result = new Result(username, reportDate, score, time);
             try {
                 String toFile = result.toString() + "\n";
                 FileOutputStream fos = openFileOutput(getString(R.string.scores), Context.MODE_APPEND);
