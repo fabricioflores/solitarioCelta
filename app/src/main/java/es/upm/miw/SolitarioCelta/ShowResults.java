@@ -3,10 +3,12 @@ package es.upm.miw.SolitarioCelta;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -49,4 +51,12 @@ public class ShowResults extends Activity {
 		}
 		textView.setText(finalText);
 	}
+
+    public void borrarTodo(View view){
+        String dir = getFilesDir().getAbsolutePath();
+        File file = new File(dir,getString(R.string.scores));
+        file.delete();
+        TextView textView = (TextView) findViewById(R.id.scores);
+        textView.setText("");
+    }
 }
